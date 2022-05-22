@@ -1,0 +1,83 @@
+.form-group .paper-check,
+.form-group .paper-radio {
+    cursor: pointer;
+    display: inline !important;
+    margin-bottom: .5rem;
+}
+.form-group .paper-check input+span,
+.form-group .paper-radio input+span {
+    display: inline !important  ;
+}
+.paper-radio input+span {
+    margin-right: 1em;
+}
+div.form-group{
+    margin-bottom: 0.4em !important;
+}
+
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    text-align: left;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    right: 2%;
+    top: 30px;
+    font-size: 17px;
+}
+
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 9.5s;
+    animation: fadein 0.5s, fadeout 0.5s 9.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        top: 0;
+        opacity: 0;
+    }
+
+    to {
+        top: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        top: 0;
+        opacity: 0;
+    }
+
+    to {
+        top: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        top: 30px;
+        opacity: 1;
+    }
+
+    to {
+        top: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        top: 30px;
+        opacity: 1;
+    }
+
+    to {
+        top: 0;
+        opacity: 0;
+    }
+}
