@@ -14,7 +14,9 @@
 div.form-group{
     margin-bottom: 0.4em !important;
 }
-
+#close{
+    display: none;
+}
 #toast {
     visibility: hidden;
     min-width: 250px;
@@ -80,4 +82,71 @@ div.form-group{
         top: 0;
         opacity: 0;
     }
+}
+#openbaricon {
+    display: none;
+}
+#left-screen{
+    float: left;
+    width:20%;
+}
+#right-screen {
+    width: 80%;
+    float: left;
+}
+
+@media screen and (max-width: 1200px) {
+    #left-screen{
+        width: 30%;
+    }
+    #right-screen {
+        width: 70%;
+    }
+}
+@media screen and (max-width: 992px) {
+    #left-screen{
+        width: 35%;
+    }
+    #right-screen {
+        width: 65%;
+    }
+}
+@media screen and (max-width: 700px) {
+
+    #right-screen {
+        width: 100%;
+    }
+    #openbaricon{
+        display: inline;
+    }
+    #openbaricon:hover{
+        cursor: pointer;
+    }
+        #close {
+            display: inline;
+        }
+        #close:hover{
+            cursor: pointer;
+        }
+}
+.sidenav {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.1s;
+    padding-top: 0;
+}
+.width-0{
+    width: 0;
+}
+.width-50{
+    width: 50vh;
+}
+#scrollableDiv:first-child {
+    flex: 1 1 auto;
 }

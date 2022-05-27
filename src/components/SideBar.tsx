@@ -4,13 +4,17 @@ import { AuthContext } from '../contexts/AuthContext';
 import Server from '../core/CallServer';
 import { Room } from './ChatWindow';
 import Toast from './Toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClose } from '@fortawesome/free-solid-svg-icons'
 interface SideBarProps {
     currentRoom: number;
     setCurrentRoom: (roomId: number) => void;
     listRoom: Room[];
+    className?: string;
+    id?: string;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ currentRoom, setCurrentRoom, listRoom }) => {
+const SideBar: React.FC<SideBarProps> = ({ currentRoom, setCurrentRoom, listRoom, className, id }) => {
     const [user] = React.useContext(AuthContext);
     const [joinRoomId, setJoinRoomId] = React.useState<number | undefined>(undefined);
     const handleLogout = () => {
@@ -36,12 +40,22 @@ const SideBar: React.FC<SideBarProps> = ({ currentRoom, setCurrentRoom, listRoom
             setJoinRoomId(Number(event.target.value));
         }
     }
-    return (<div className={`${sidebarStyle['side-bar']} card`}>
+    const handleCloseSidebar = () => {
+        const sidebar = document.getElementById('sidenav');
+        if (sidebar) {
+            sidebar.classList.remove('width-50');
+            sidebar.classList.add('width-0');
+        }
+    }
+    return (<div id={id} className={`${sidebarStyle['side-bar']} card ${className}`}>
 
         <div className="card-header">
             <img alt='avt' src='https://unsplash.it/50' style={{ borderRadius: '50%', float: 'left' }}></img>
             <div style={{ marginTop: '1em', marginLeft: '0.5em', float: 'left' }}>{user?.fullName}</div>
-            <input type="button" onClick={handleLogout} style={{ float: 'right', marginLeft: '0.5em', marginTop: '0.2em' }} className="paper-btn btn-small btn-primary" value="Logout" />
+            <div style={{ float: 'right' }}>
+                <input type="button" onClick={handleLogout} style={{ marginLeft: '0.5em', marginTop: '0.2em', marginRight: '3em' }} className="paper-btn btn-small btn-primary" value="Logout" />
+                <span id="close"><FontAwesomeIcon size='2x' icon={faClose} onClick={handleCloseSidebar} /></span>
+            </div>
         </div>
         <div className="card-body">
             <h4 className="card-title">List room</h4>

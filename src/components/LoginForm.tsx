@@ -29,6 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setUser, from }) => {
             if (setUser) {
                 setUser(res.data.user as IUser);
             }
+            console.log(res.headers['set-cookie']);
 
             Toast.success("Login success. Have fun!");
             navigate(from);

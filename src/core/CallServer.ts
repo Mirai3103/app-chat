@@ -9,7 +9,8 @@ export interface RegisterPayload {
 
 const instance = axios.create({
     baseURL: "https://realtimechatlaffy.herokuapp.com/api",
-    withCredentials: true
+    // baseURL: "http://localhost:8081/api",
+    withCredentials: true,
 });
 
 
@@ -38,6 +39,9 @@ const getAllMessage = (roomId: number) => {
 const joinARoom = (roomId: number) => {
     return instance.post(`/user/joinRoom`, { roomId });
 }
+const getListMessageWithPagination = (roomId: number, page: number) => {
+    return instance.get(`/chat/messages/${roomId}?page=${page}`);
+}
 export default {
     login,
     register,
@@ -46,5 +50,6 @@ export default {
     getListRoom,
     getChatToken,
     getAllMessage,
-    joinARoom
+    joinARoom,
+    getListMessageWithPagination
 } as const;

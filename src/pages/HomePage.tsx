@@ -6,10 +6,34 @@ export interface Room {
     id: number;
     name: string;
 }
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
+function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = React.useState(getWindowDimensions());
+
+    React.useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+}
+
 const HomePage: React.FC = () => {
     const [currentRoom, setCurrentRoom] = React.useState<number>(-1);
     const [rooms, setRooms] = React.useState<Room[]>([]);
     const [token, setToken] = React.useState<string>('');
+    const { height, width } = useWindowDimensions();
+    console.log(height, width);
     React.useEffect(() => {
         Server.getListRoom().then(res => {
             setRooms(res.data.rooms);
@@ -34,11 +58,11 @@ const HomePage: React.FC = () => {
     console.log(token)
     return (<div className='container-lg'>
 
-        <div style={{ width: '20%', float: 'left' }}>
-            <SideBar currentRoom={currentRoom} setCurrentRoom={setCurrentRoom} listRoom={rooms} />
+        <div id='left-screen' >
+            <SideBar id={width < 700 ? 'sidenav' : ''} className={width < 700 ? 'sidenav' : ''} currentRoom={currentRoom} setCurrentRoom={setCurrentRoom} listRoom={rooms} />
         </div>
 
-        <div style={{ width: '80%', float: 'left' }}>
+        <div id='right-screen' >
             <ChatWindow token={token} roomId={currentRoom} listRoom={rooms} />
         </div>
 
